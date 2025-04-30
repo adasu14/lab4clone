@@ -6,11 +6,13 @@
  * @returns The sum of the two numbers if add is true and false otherwise.
  */
 function sumValues(num1, num2, add) {
-    if (add) {
-        const result = num1 + num2;  // Fix: use const correctly (assign during declaration)
-        return result;
+    // Check for number types and add being a boolean
+    if (typeof num1 !== 'number' || typeof num2 !== 'number') return false;
+
+    if (add === true) {
+        return num1 + num2;
     } else {
-        return false;  // Fix: explicitly return false (instead of !add)
+        return false;
     }
 }
 
@@ -18,15 +20,15 @@ function sumValues(num1, num2, add) {
  * 
  * @param {*} prices, an array of the original price.
  * @param {*} discount, a number between 0-1 to represent the discount. 
- * @returns An array of each price's new price, after the discount is applied. Or false, if prices array is empty.
+ * @returns An array of each price's new price, after the discount is applied. Or false, if prices array is empty or input is invalid.
  */
 function discountPrices(prices, discount) {
-    if (prices.length === 0) return false;  // Fix: return false if array is empty
+    if (!Array.isArray(prices) || typeof discount !== 'number') return false;
+    if (prices.length === 0) return false;
 
     const discounted = [];
     for (let i = 0; i < prices.length; i++) {
-        let discountedPrice = prices[i] * (1 - discount);  // Fix: move variable inside loop
-        discounted.push(discountedPrice);
+        discounted.push(prices[i] * (1 - discount));
     }
 
     return discounted;
